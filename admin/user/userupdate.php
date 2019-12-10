@@ -17,8 +17,20 @@ include "../../db/connection.php";
             window.location.replace('../../login.html');
             </script>";  
 		}
-		$sqlUser = "SELECT * from user";
-        $res = $conn->query($sqlUser);
+	$username = $_GET['username'];
+	$sql = "select * from user where Username = '$username'";
+	$res = $conn->query($sql);
+	while($row = $res->fetch_assoc())
+		{
+			$password = $row['Password'];
+			$email = $row['Email'];
+			$nama = $row['Nama'];
+			$alamat = $row['Alamat'];
+			$jenkel = $row['JenisKelamin'];
+			$level = $row['Level'];
+		}
+		
+      
     ?>
 <html class="fixed">
 	<head>
@@ -133,14 +145,14 @@ include "../../db/connection.php";
 											<span>Dashboard</span>
 										</a>
 									</li>
-									<li class="nav">
-										<a href="../barang/barangtabel.php">
+									<li class="nav-active">
+										<a href="barangtabel.php">
 											<i class="fa fa-inbox" aria-hidden="true"></i>
 											<span>Barang</span>
 										</a>
 									</li>
-									<li class="nav-active">
-										<a href="usertabel.php">
+									<li class="nav">
+										<a href="../user/usertabel.php">
 											<i class="fa fa-users" aria-hidden="true"></i>
 											<span>User</span>
 										</a>
@@ -162,7 +174,7 @@ include "../../db/connection.php";
 
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2>User</h2>
+						<h2>Update User</h2>
 					
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
@@ -180,169 +192,76 @@ include "../../db/connection.php";
 
 
 					<!-- start: page -->
-					<div class="row">
-						<div class="col-md-6 col-lg-12 col-xl-6">
-							<section class="panel">
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-12">
-                                            <div class="table-responsive">
-                                            <table class="table table-bordered table-striped col-lg-12" id="datatable-ajax" data-url="../../assets/ajax/ajax-datatables-sample.json" >
-                                                <thead>
-                                                    <tr>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Password</th>
-                                                        <th>Nama</th>
-														<th>Alamat</th>
-														<th>Jenis Kelamin</th>
-														<th>Level</th>
-														<th>Action</th>
-                                                    </tr>
-                                                </thead>
-												<tbody>
-													
-												</tbody>
-                                                    <?php
-													// $row = $res->fetch_assoc();
-													// var_dump($row['IDbarang']);
-                                                    // var_dump($row['Nama']);
-													// var_dump($row['Stok']);
-													// var_dump($row['Harga']);
-													// var_dump($row['Gambar']);
-                                                    while($row = $res->fetch_assoc()) {
-                                                        // echo "id: " . $row["IDbarang"]. " - Name: " . $row["Nama"]. " " . $row["Stok"]. " " . $row["Harga"]. " " . $row["Gambar"]."<br>";
-                                                        echo "<tr>
-                                                                <td>". $row["Username"]."</td>
-                                                                <td>". $row["Email"]."</td>
-                                                                <td> ". $row["Password"]."</td>
-                                                                <td> ". $row["Nama"]."</td>
-																<td> ". $row["Alamat"]."</td>
-																<td> ". $row["JenisKelamin"]."</td>
-																<td> ". $row["Level"]."</td>
-																<td><a href='userupdate.php?username=".$row['Username']."' class='btn btn-warning btn-block'>Update 
-																<a href='userdelete.php?username=".$row["Username"]."' class='btn btn-danger btn-block'>Delete
-																</td>
-                                                        </tr>";
-                                                    }
-                                                            $conn->close();
-													?>
-													<tr>
-														<td colspan=8>
-															<button class="btn btn-danger btn-block" name="delete" value="delete">Delete</button>
-															<a href='userinsert.php' class='btn btn-primary btn-block'>Add
-														</td>
-													</tr>
-												</tbody>
-                                            </table>
-                                            </div>
-                                            
-									</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
 								</div>
-							</section>
-						</div>
-						<div class="col-md-6 col-lg-12 col-xl-6">
-							<div class="row">
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-primary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-primary">
-														<i class="fa fa-life-ring"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Support Questions</h4>
-														<div class="info">
-															<strong class="amount">1281</strong>
-															<span class="text-primary">(14 unread)</span>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(view all)</a>
-													</div>
-												</div>
+						
+								<h2 class="panel-title">Form Update User</h2>
+							</header>
+							<div class="panel-body">
+									<form action="userupdateaction.php" class="form-horizontal" method="post" enctype="multipart/form-data">
+										<div class="form-group">
+											
+											<div class="col-md-10">
+												<input type="hidden" class="form-control" id="inputDefault" name="username" value="<?php echo $username; ?>">
+											</div>	
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Email</label>
+											<div class="col-md-7">
+												<input type="email" class="form-control" id="inputDefault" name="email" value="<?php echo $email; ?>">
+											</div>	
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Password</label>
+											<div class="col-md-7">
+												<input type="password" class="form-control" id="inputDefault" name="password" value="<?php echo $password; ?>">
 											</div>
 										</div>
-									</section>
-								</div>
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-secondary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-secondary">
-														<i class="fa fa-usd"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Total Profit</h4>
-														<div class="info">
-															<strong class="amount">$ 14,890.30</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(withdraw)</a>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Nama</label>
+											<div class="col-md-7">
+												<input type="nama" class="form-control" id="inputDefault" name="nama" value="<?php echo $nama; ?>">
 											</div>
 										</div>
-									</section>
-								</div>
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-tertiary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-tertiary">
-														<i class="fa fa-shopping-cart"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Orders</h4>
-														<div class="info">
-															<strong class="amount">38</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(statement)</a>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Alamat</label>
+											<div class="col-md-7">
+												<textarea name="alamat" id="inputDefault" class="form-control" cols="30" rows="3" ><?php echo $alamat; ?></textarea>
 											</div>
 										</div>
-									</section>
-								</div>
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-quartenary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-quartenary">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Visitors</h4>
-														<div class="info">
-															<strong class="amount">3765</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(report)</a>
-													</div>
-												</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Jenis Kelamin</label>
+											<div class="col-md-7 form-inline">
+												<input type="radio" name="jenkel" id="inputDefault" class="form-control" value="Laki - Laki"> Laki - Laki 
+												<input type="radio" name="jenkel" id="inputDefault" class="form-control" value="Perempuan"> Perempuan
 											</div>
 										</div>
-									</section>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="inputDefault">Level</label>
+											<div class="col-md-7">
+												<select name="level" class="form-control" id="inputDefault">
+													<option value="Admin">Admin</option>
+													<option value="Kasir">Kasir</option>
+												</select> 
+											</div>
+										</div>
+										<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+											<div class="col-md-7">
+												<button class="btn btn-block" name="submit" value="Submit">Submit</button>
+											</div>
+										</div>
+									</form>
 								</div>
-							</div>
-						</div>
+						</section>
 					</div>
+				</div>
 
 					<!-- end: page -->
 				</section>
@@ -358,6 +277,7 @@ include "../../db/connection.php";
 						<div class="sidebar-right-wrapper">
 			
 							<div class="sidebar-widget widget-calendar">
+								<h6>Upcoming Tasks</h6>
 								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
 							</div>
 			

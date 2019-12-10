@@ -219,23 +219,26 @@ include "../../db/connection.php";
 														<tbody>
 															<?php
 															while($row = $res->fetch_assoc()) {
-																echo "<tr>
-																		<td><input type='checkbox' name='chkbox[]'  value='".$row["idBarang"]."'> ".$row["idBarang"]."</td>
-																		<td>". $row["Nama"]."</td>
-																		<td> ". $row["Stok"]."</td>
-																		<td> ". $row["Harga"]."</td>
-																		<td><img src='../../assets/images/barang/". $row['gambar']."' height=100 width=100></td>
-																		<td><a href='barangupdate.php?idBarang='".$row["idBarang"]."' class='btn btn-primary btn-block'>Update 
-																		<a href='barangedelete.php?idBarang='".$row["idBarang"]."' class='btn btn-danger btn-block'>Delete
-																		</td>
+																?><tr>
+																		<td><input type='checkbox' name='chkbox[]'  value='<?php echo $row["idBarang"]?>'> <?php echo $row["idBarang"]?></td>
+																		<td><?php echo $row["Nama"]?></td>
+																		<td><?php echo $row["Stok"]?></td>
+																		<td><?php echo $row["Harga"]?></td>
+																		<?php
+																		echo "<td><img src='../../assets/images/barang/". $row['gambar']."' height=100 width=100></td>
+																		<td><a href='barangupdate.php?idBarang=".$row['idBarang']."' class='btn btn-warning btn-block'>Update 
+																		<a href='barangdelete.php?idBarang=".$row["idBarang"]."' class='btn btn-danger btn-block'>Delete
+																		</td>"
+																		?>
 
-																</tr>";
+																</tr><?php
 															}
 															$conn->close();
 															?>
 															<tr>
 																<td colspan=6>
-																	<button class="btn btn-danger btn-block" name="delete" value="delete">Delete</button>	
+																	<button class="btn btn-danger btn-block" name="delete" value="delete">Delete</button>
+																	<a href='baranginsert.php' class='btn btn-primary btn-block'>Add
 																</td>
 															</tr>
 														</tbody>

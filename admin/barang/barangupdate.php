@@ -26,7 +26,6 @@ include "../../db/connection.php";
 			$stok = $row['Stok'];
 			$harga = $row['Harga'];
 
-			echo $nama;
 		}
 		
       
@@ -200,14 +199,20 @@ include "../../db/connection.php";
 											<a href="#" class="fa fa-times"></a>
 								</div>
 						
-								<h2 class="panel-title">Form Insert Barang</h2>
+								<h2 class="panel-title">Form Update Barang</h2>
 							</header>
 							<div class="panel-body">
-								<form action="baranginsertaction.php" class="form-horizontal" method="post" enctype="multipart/form-data">
+								<form action="barangupdateaction.php" class="form-horizontal" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-md-3 control-label" for="inputDefault">Nama</label>
 										<div class="col-md-7">
 											<input type="text" class="form-control" id="inputDefault" name="nama" value="<?php echo $nama; ?>">
+										</div>
+										
+									</div>
+									<div class="form-group">
+										<div class="col-md-7">
+											<input type="hidden" class="form-control" id="inputDefault" name="idBarang" value="<?php echo $idBarang; ?>">
 										</div>
 										
 									</div>

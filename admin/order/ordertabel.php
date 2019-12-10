@@ -20,22 +20,6 @@ include "../../db/connection.php";
 		$sqlOrders = "SELECT a.idorderdetail,a.qty,b.tanggal,b.username,c.nama,c.harga,c.harga*a.qty total FROM `orderdetail` a, orders b,barang c WHERE a.`idOrder` = b.idorder && a.idBarang = c.idbarang ";
         $res = $conn->query($sqlOrders);
         
-		// if (mysqli_num_rows($res) > 0) {
-        //     // output data of each row
-        //     while($row = $res->fetch_assoc()) {
-        //         // echo "id: " . $row["IDbarang"]. " - Name: " . $row["Nama"]. " " . $row["Stok"]. " " . $row["Harga"]. " " . $row["Gambar"]."<br>";
-        //         echo "<tr>
-        //                 <td>". $row["IDbarang"]."</td>
-        //                 <td>". $row["Nama"]."</td>
-        //                 <td> ". $row["Stok"]."</td>
-        //                 <td> ". $row["Harga"]."</td>
-        //                 <td> ". $row["Gambar"]."</td>
-        //         </tr>";
-        //     }
-        // } else {
-        //     echo "0 results";
-        // }
-		// die();
     ?>
 <html class="fixed">
 	<head>
@@ -214,6 +198,7 @@ include "../../db/connection.php";
 														<th>Barang</th>
 														<th>Harga</th>
 														<th>Total</th>
+														
                                                     </tr>
                                                 </thead>
 												<tbody>

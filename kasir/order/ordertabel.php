@@ -3,9 +3,9 @@
 include "../../db/connection.php";
         session_start();
         if ($_SESSION['status'] == 'login') {
-            if ( $_SESSION['Level'] == 'Admin') {
+            if ( $_SESSION['Level'] == 'Kasir') {
             }else {
-                $message = "You are not An Admin.";
+                $message = "You are not A Kasir.";
                 echo "<script type='text/javascript'>alert('$message');
                 window.location.replace('../../login.html');
                 </script>";  
@@ -17,7 +17,7 @@ include "../../db/connection.php";
             window.location.replace('../../login.html');
             </script>";  
 		}
-		$sqlOrders = "select * from orders";
+		$sqlOrders = "select * from orders order by idorder desc";
         $res = $conn->query($sqlOrders);
         
     ?>
@@ -132,18 +132,6 @@ include "../../db/connection.php";
 										<a href="../index.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Dashboard</span>
-										</a>
-									</li>
-									<li class="nav">
-										<a href="../barang/barangtabel.php">
-											<i class="fa fa-inbox" aria-hidden="true"></i>
-											<span>Barang</span>
-										</a>
-									</li>
-									<li class="nav">
-										<a href="../user/usertabel.php">
-											<i class="fa fa-users" aria-hidden="true"></i>
-											<span>User</span>
 										</a>
 									</li>
 									<li class="nav-active">

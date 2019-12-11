@@ -204,16 +204,10 @@ include "../../db/connection.php";
 													
 												</tbody>
                                                     <?php
-													// $row = $res->fetch_assoc();
-													// var_dump($row['IDbarang']);
-                                                    // var_dump($row['Nama']);
-													// var_dump($row['Stok']);
-													// var_dump($row['Harga']);
-													// var_dump($row['Gambar']);
                                                     while($row = $res->fetch_assoc()) {
-                                                        // echo "id: " . $row["IDbarang"]. " - Name: " . $row["Nama"]. " " . $row["Stok"]. " " . $row["Harga"]. " " . $row["Gambar"]."<br>";
-                                                        echo "<tr>
-                                                                <td>". $row["Username"]."</td>
+														echo "<tr>
+														
+                                                                <td><input type='checkbox' name='chkbox[]'  value='".$row['Username']."'> ".$row["Username"]."</td>
                                                                 <td>". $row["Email"]."</td>
                                                                 <td> ". $row["Password"]."</td>
                                                                 <td> ". $row["Nama"]."</td>

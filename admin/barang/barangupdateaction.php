@@ -19,7 +19,7 @@ $query = mysqli_query($conn,"UPDATE barang set Nama='$nama',Stok='$stok',Harga=$
         window.location.href = 'barangtabel.php';
         </script>"; 
         }else{
-            echo 'GAGAL MENGUPLOAD GAMBAR';
+            echo $conn->error();
         }
 
 ?>

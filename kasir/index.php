@@ -97,12 +97,6 @@ include "../db/connection.php";
 							<ul class="list-unstyled">
 								<li class="divider"></li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="fa fa-user"></i> My Profile</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
 									<a role="menuitem" tabindex="-1" href="../logout.php"><i class="fa fa-power-off"></i> Logout</a>
 								</li>
 							</ul>
@@ -183,8 +177,6 @@ include "../db/connection.php";
 													<strong>
 														<select class="form-control" id="salesSelector">
 															<option value="JSOFT Admin" selected>JSOFT Admin</option>
-															<option value="JSOFT Drupal" >JSOFT Drupal</option>
-															<option value="JSOFT Wordpress" >JSOFT Wordpress</option>
 														</select>
 													</strong>
 												</h2>
@@ -209,43 +201,7 @@ include "../db/connection.php";
 
 													</script>
 
-													<!-- Flot: Sales JSOFT Drupal -->
-													<div class="chart chart-sm" data-sales-rel="JSOFT Drupal" id="flotDashSales2" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales2Data = [{
-														    data: [
-																 <?php 
-																	while ($p = mysqli_fetch_assoc($res)) { 
-																		echo '["' . $p['bulan'] . '",' . $p['jumlah'] . '],';
-																	}
-																?>
-														    ],
-														    color: "#2baab1"
-														}];
-
-														// See: ../assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
-													</script>
-
-													<!-- Flot: Sales JSOFT Wordpress -->
-													<div class="chart chart-sm" data-sales-rel="JSOFT Wordpress" id="flotDashSales3" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales3Data = [{
-														    data: [
-																 <?php 
-																	while ($p = mysqli_fetch_assoc($res)) { 
-																		echo '["' . $p['bulan'] . '",' . $p['jumlah'] . '],';
-																	}
-																?>
-														    ],
-														    color: "#734ba9"
-														}];
-
-														// See: ../assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
-													</script>
+													<!-- Flot: Sales JSOFT Drupal -->													
 												</div>
 
 											</div>
@@ -256,25 +212,29 @@ include "../db/connection.php";
 						</div>
 						<div class="col-md-6 col-lg-12 col-xl-6">
 							<div class="row">
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-primary">
+							<div class="col-md-12 col-lg-6 col-xl-6">
+									<section class="panel panel-featured-left panel-featured-tertiary">
 										<div class="panel-body">
 											<div class="widget-summary">
 												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-primary">
-														<i class="fa fa-life-ring"></i>
+													<div class="summary-icon bg-tertiary">
+														<i class="fa fa-shopping-cart"></i>
 													</div>
 												</div>
 												<div class="widget-summary-col">
 													<div class="summary">
-														<h4 class="title">Support Questions</h4>
+														<h4 class="title">Order Bulan Ini</h4>
+														<?php
+														$sqlCount = "select count(idorder)jumlah from orders where month(tanggal) = month(CURRENT_DATE)";
+														$resCount = $conn->query($sqlCount);
+														$rowC = $resCount->fetch_assoc();
+														$jumlah = $rowC['jumlah'];
+														?>
 														<div class="info">
-															<strong class="amount">1281</strong>
-															<span class="text-primary">(14 unread)</span>
+															<strong class="amount"><?php echo $jumlah ?></strong>
 														</div>
 													</div>
 													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(view all)</a>
 													</div>
 												</div>
 											</div>
@@ -291,62 +251,20 @@ include "../db/connection.php";
 													</div>
 												</div>
 												<div class="widget-summary-col">
+													<?php
+														$sqlTotal = "SELECT month(tanggal) bulan,sum(grandtotal) total FROM `orders` WHERE month(tanggal) = month(CURRENT_DATE)";
+														$resTotal = $conn->query($sqlTotal);
+														$rowT = $resTotal->fetch_assoc();
+														$duit = $rowT['total'];
+													?>
 													<div class="summary">
-														<h4 class="title">Total Profit</h4>
+														<h4 class="title">Total Profit Bulan ini</h4>
 														<div class="info">
-															<strong class="amount">$ 14,890.30</strong>
+															
+															<strong class="amount"><?php echo "Rp. ".Number_format($duit);  ?></strong>
 														</div>
 													</div>
 													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(withdraw)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-tertiary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-tertiary">
-														<i class="fa fa-shopping-cart"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Orders</h4>
-														<div class="info">
-															<strong class="amount">38</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(statement)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-md-12 col-lg-6 col-xl-6">
-									<section class="panel panel-featured-left panel-featured-quartenary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-quartenary">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Today's Visitors</h4>
-														<div class="info">
-															<strong class="amount">3765</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(report)</a>
 													</div>
 												</div>
 											</div>

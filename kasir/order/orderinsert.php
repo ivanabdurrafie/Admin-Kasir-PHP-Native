@@ -3,9 +3,9 @@
 include "../../db/connection.php";
         session_start();
         if ($_SESSION['status'] == 'login') {
-            if ( $_SESSION['Level'] == 'Admin') {
+            if ( $_SESSION['Level'] == 'Kasir') {
             }else {
-                $message = "You are not An Admin.";
+                $message = "You are not A Kasir.";
                 echo "<script type='text/javascript'>alert('$message');
                 window.location.replace('../../login.html');
                 </script>";  
@@ -95,12 +95,6 @@ include "../../db/connection.php";
 								<ul class="list-unstyled">
 									<li class="divider"></li>
 									<li>
-										<a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="fa fa-user"></i> My Profile</a>
-									</li>
-									<li>
-										<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-									</li>
-									<li>
 										<a role="menuitem" tabindex="-1" href="../../logout.php"><i class="fa fa-power-off"></i> Logout</a>
 									</li>
 								</ul>
@@ -134,18 +128,6 @@ include "../../db/connection.php";
 												<span>Dashboard</span>
 											</a>
 										</li>
-										<li class="nav-active">
-											<a href="barangtabel.php">
-												<i class="fa fa-inbox" aria-hidden="true"></i>
-												<span>Barang</span>
-											</a>
-										</li>
-										<li class="nav">
-											<a href="../user/usertabel.php">
-												<i class="fa fa-users" aria-hidden="true"></i>
-												<span>User</span>
-											</a>
-										</li>
 										<li class="nav">
 											<a href="../order/ordertabel.php">
 												<i class="fa fa-usd" aria-hidden="true"></i>
@@ -163,16 +145,16 @@ include "../../db/connection.php";
 
 					<section role="main" class="content-body">
 						<header class="page-header">
-							<h2>Insert User</h2>
+							<h2>Insert Order</h2>
 						
 							<div class="right-wrapper pull-right">
 								<ol class="breadcrumbs">
 									<li>
-										<a href="usertabel.php">
-											<i class="fa fa-users"></i>
+										<a href="ordertabel.php">
+											<i class="fa fa-usd"></i>
 										</a>
 									</li>
-									<li><span>User</span></li>
+									<li><span>Order</span></li>
 								</ol>
 						
 								<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -190,7 +172,7 @@ include "../../db/connection.php";
 												<a href="#" class="fa fa-times"></a>
 									</div>
 							
-									<h2 class="panel-title">Form Insert User</h2>
+									<h2 class="panel-title">Form Insert Order</h2>
 								</header>
 								<div class="panel-body">
 									<form action="orderinsertaction.php" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -205,7 +187,7 @@ include "../../db/connection.php";
 														<?php
 															while($rowBarang = $result->fetch_assoc()){
 														?>
-															<option value="<?php echo $rowBarang['idBarang']; ?>"><?php echo $rowBarang['Nama']; ?></option>
+															<option value="<?php echo $rowBarang['idBarang']; ?>"><?php echo $rowBarang['Nama']." Rp. ".Number_format($rowBarang['Harga']); ?></option>
 														<?php
 															}
 														?>

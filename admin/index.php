@@ -270,7 +270,7 @@ include "../db/connection.php";
 														$duit = $rowT['total'];
 													?>
 													<div class="summary">
-														<h4 class="title">Total Profit Bulan ini</h4>
+														<h4 class="title">Total Transaksi Bulan ini</h4>
 														<div class="info">
 															
 															<strong class="amount"><?php echo "Rp. ".Number_format($duit);  ?></strong>
